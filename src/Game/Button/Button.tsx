@@ -7,9 +7,11 @@ interface ButtonProps {
     y: number;
     activeButtonId: number;
     setActiveButtonId: (id:number) => void;
+    currentScore: number;
+    setCurrentScore: (currentScore:number) => void;
 }
 
-export const Button: FunctionComponent<ButtonProps> = ({ id, x, y, activeButtonId, setActiveButtonId}) => {
+export const Button: FunctionComponent<ButtonProps> = ({ id, x, y, activeButtonId, setActiveButtonId, currentScore, setCurrentScore}) => {
     
     const isActive = id === activeButtonId;
     const GetClassName = (): string => {
@@ -20,7 +22,9 @@ export const Button: FunctionComponent<ButtonProps> = ({ id, x, y, activeButtonI
     }
     const onClick = () : void => {
         if (isActive) {
-            setActiveButtonId (Math.floor(Math.random() * 8))
+            const nextButton = (Math.floor(Math.random() * 8))
+            setActiveButtonId(nextButton);
+            setCurrentScore(currentScore + 1)
         }
     }
     return (
